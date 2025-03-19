@@ -290,7 +290,7 @@ export default {
       }
     }
     
-    // Handle event click
+    // Handle event click - Esta é a função que retorna todas as informações do evento
     function handleEventClick(event) {
       emit('trigger-event', {
         name: 'eventClicked',
