@@ -207,6 +207,11 @@ export default {
       return date.toISOString().split('T')[0];
     }
     
+    // Helper to format date to YYYY-MM-DD string
+    function formatDateToYMD(date) {
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
+    
     // Navigation functions
     function previousWeek() {
       const newDate = new Date(currentWeekStart.value);
@@ -289,7 +294,7 @@ export default {
       }
     }
     
-    // Função de manipulação de clique no evento - retorna todos os dados do evento
+    // Handle event click - retorna todos os dados do evento
     function handleEventClick(event) {
       emit('trigger-event', {
         name: 'eventClicked',
@@ -300,14 +305,14 @@ export default {
       });
     }
     
-    // Filter events for a specific day
+    // FUNÇÃO CORRIGIDA: Filtra eventos para um dia específico
     function getEventsForDay(date) {
-      // Check if we have data from the new configuration
+      // Verifica se temos dados da configuração
       if (!props.content.data || !Array.isArray(props.content.data)) {
         return [];
       }
       
-      // Get the field mapping configuration
+      // Obtém a configuração de mapeamento de campos
       const titleField = props.content.titleField || 'title';
       const dateField = props.content.dateField || 'date';
       const startTimeField = props.content.startTimeField || 'startTime';
@@ -315,35 +320,42 @@ export default {
       const categoryField = props.content.categoryField || 'category';
       const importantField = props.content.importantField || 'important';
       
-      // Filter events for the current day
+      // Normaliza a data alvo para o formato YYYY-MM-DD sem componente de hora
+      const targetDateStr = formatDateToYMD(date);
+      
+      // Filtra eventos para o dia atual
       let events = props.content.data.filter(event => {
-        // Skip filtering if showEmptyDays is false
+        // Ignora filtragem se showEmptyDays for false
         if (!props.content.showEmptyDays && !event[dateField]) {
           return false;
         }
         
-        // Parse the event date using the configured field name
+        // Analisa a data do evento usando o nome do campo configurado
         if (!event[dateField]) return false;
         
-        const eventDate = new Date(event[dateField]);
-        return isSameDay(eventDate, date);
+        // Extrai apenas a parte da data (YYYY-MM-DD) sem o componente de hora
+        const eventDateStr = event[dateField].split('T')[0];
+        
+        // Compara as strings de data diretamente, sem criar objetos Date
+        return eventDateStr === targetDateStr;
       });
       
-      // Map database fields to component fields
+      // Mapeia campos do banco de dados para campos do componente
       events = events.map(event => {
         return {
-          title: event[titleField] || 'Untitled Event',
+          title: event[titleField] || 'Evento sem título',
           date: event[dateField],
           startTime: event[startTimeField] || '00:00',
           endTime: event[endTimeField] || '00:00',
           category: event[categoryField] || 'default',
           important: !!event[importantField],
           color: event.color || null,
+          id: event.id || null,
           originalData: event // Mantém os dados originais para o callback de clique no evento
         };
       });
       
-      // Apply sorting based on configuration
+      // Aplica ordenação com base na configuração
       const sortBy = props.content.sortBy || 'default';
       if (sortBy === 'startTime') {
         events.sort((a, b) => a.startTime.localeCompare(b.startTime));
