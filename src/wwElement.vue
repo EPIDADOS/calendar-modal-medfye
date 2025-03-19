@@ -93,7 +93,6 @@
 </template>
 
 <script>
-// Script remains mostly unchanged - just keeping the same functionality
 import { ref, computed, watch } from 'vue';
 
 export default {
@@ -290,7 +289,7 @@ export default {
       }
     }
     
-    // Handle event click - Esta é a função que retorna todas as informações do evento
+    // Função de manipulação de clique no evento - retorna todos os dados do evento
     function handleEventClick(event) {
       emit('trigger-event', {
         name: 'eventClicked',
@@ -301,7 +300,7 @@ export default {
       });
     }
     
-    // Filter events for a specific day - updated for the new configuration
+    // Filter events for a specific day
     function getEventsForDay(date) {
       // Check if we have data from the new configuration
       if (!props.content.data || !Array.isArray(props.content.data)) {
@@ -340,7 +339,7 @@ export default {
           category: event[categoryField] || 'default',
           important: !!event[importantField],
           color: event.color || null,
-          originalData: event // Keep original data for event click callback
+          originalData: event // Mantém os dados originais para o callback de clique no evento
         };
       });
       
@@ -465,7 +464,7 @@ export default {
       align-items: center;
       
       .nav-button {
-        width: 32px; /* Larger for touch targets */
+        width: 32px;
         height: 32px;
         background-color: transparent;
         border: 1px solid #e0e0e0;

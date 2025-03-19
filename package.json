@@ -1,7 +1,7 @@
 {
   "name": "activity-calendar",
   "version": "1.0.0",
-  "description": "A weekly activity calendar component for WeWeb that displays scheduled events from database sources with customizable styling",
+  "description": "Um componente de calendário de atividades semanal para WeWeb que exibe eventos agendados de fontes de banco de dados com estilo personalizável",
   "main": "src/wwElement.vue",
   "license": "MIT",
   "scripts": {
@@ -20,13 +20,11 @@
   },
   "keywords": [
     "weweb",
-    "calendar",
-    "activities",
-    "schedule",
-    "events",
-    "planner",
-    "weekly",
+    "calendario",
+    "atividades",
     "agenda",
-    "database-driven"
+    "eventos",
+    "planejamento",
+    "semanal"
   ]
 }

@@ -7,25 +7,7 @@ export default {
     icon: 'calendar',
   },
   properties: {
-    // Mode selector - similar to the screenshot
-    mode: {
-      label: {
-        en: 'Mode',
-        pt: 'Modo',
-      },
-      type: 'TextSelect',
-      options: {
-        options: [
-          { value: 'guided', label: { en: 'Guided', pt: 'Guiado' } },
-          { value: 'advanced', label: { en: 'Advanced', pt: 'Avançado' } },
-        ],
-      },
-      section: 'specific',
-      defaultValue: 'guided',
-      bindable: false,
-    },
-
-    // Data source configuration
+    // Configuração da fonte de dados
     data: {
       label: {
         en: 'Data',
@@ -39,15 +21,16 @@ export default {
       bindingValidation: {
         type: 'array',
         tooltip:
-          'Bind to a collection or query result containing calendar events',
+          'Vincule a uma coleção ou resultado de consulta contendo eventos de calendário',
       },
       propertyHelp: {
-        tooltip: 'Connect to a database query returning calendar events',
+        tooltip:
+          'Conecte a uma consulta de banco de dados retornando eventos de calendário',
       },
       /* wwEditor:end */
     },
 
-    // Field mapping - similar to X-axis in screenshot
+    // Mapeamento de campos
     titleField: {
       label: {
         en: 'Title field',
@@ -114,7 +97,7 @@ export default {
       bindable: true,
     },
 
-    // Similar to "Order by" in the screenshot
+    // Ordenação
     sortBy: {
       label: {
         en: 'Sort by',
@@ -123,9 +106,9 @@ export default {
       type: 'TextRadioGroup',
       options: {
         choices: [
-          { value: 'default', title: 'Default' },
-          { value: 'startTime', title: 'Start Time' },
-          { value: 'title', title: 'Title' },
+          { value: 'default', title: 'Padrão' },
+          { value: 'startTime', title: 'Hora de Início' },
+          { value: 'title', title: 'Título' },
         ],
       },
       section: 'specific',
@@ -133,7 +116,7 @@ export default {
       bindable: true,
     },
 
-    // Similar to "Include empty values" in the screenshot
+    // Mostrar dias vazios
     showEmptyDays: {
       label: {
         en: 'Show empty days',
@@ -145,7 +128,7 @@ export default {
       bindable: true,
     },
 
-    // Calendar display configuration - moved to a separate section
+    // Configuração de exibição do calendário
     calendarTitle: {
       label: {
         en: 'Calendar Title',
@@ -175,7 +158,7 @@ export default {
       },
       type: 'Number',
       section: 'content',
-      defaultValue: 4, // Default to Thursday (4)
+      defaultValue: 1, // Default para Terça-feira (1)
       bindable: true,
       options: {
         min: 0,
@@ -183,7 +166,7 @@ export default {
       },
     },
 
-    // Custom category colors - moved to style section
+    // Cores das categorias
     categoryColors: {
       label: {
         en: 'Category Colors',
@@ -202,7 +185,7 @@ export default {
       bindable: true,
     },
 
-    // Visual customization
+    // Personalização visual
     fontFamily: {
       label: {
         en: 'Font Family',
